@@ -122,7 +122,11 @@ Follow these steps to set up the project locally.
     ```bash
     php artisan migrate
     ```
-8.  **Link the project with Herd and serve (optional, but recommended for Herd users):**
+8.  **Run database seeders (if applicable):**
+    ```bash
+    php artisan db:seed
+    ```
+9.  **Link the project with Herd and serve (optional, but recommended for Herd users):**
     ```bash
     herd link
     herd serve
