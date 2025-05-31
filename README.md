@@ -84,8 +84,6 @@ This project is built with:
 * **Tailwind CSS**: For utility-first CSS styling (often included with Breeze).
 * **Laravel Herd**: Recommended local development environment (Nginx, PHP, MySQL/PostgreSQL).
 * **(Optional: Mention Livewire if you chose that stack with Breeze)**
-* **(Optional: Mention any other significant libraries or frameworks you use)**
-
 ---
 
 ## Getting Started
