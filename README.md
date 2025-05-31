@@ -59,3 +59,21 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Extra Technologies
+
+This project utilizes [Alpine.js](https://alpinejs.dev/) to easily add interactivity to the frontend.
+
+## Email Configuration with Gmail
+
+To send emails using Gmail, it is necessary to modify the `.env` file with the following configuration:
+
+````dotenv
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME="your_gmail_address@gmail.com"
+MAIL_PASSWORD="your_gmail_app_password"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="your_gmail_address@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
