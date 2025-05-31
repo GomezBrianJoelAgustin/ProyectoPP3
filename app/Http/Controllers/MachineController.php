@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\Rule; 
 use App\Models\MachineType;
 use App\Models\Machine;
 use App\Models\Maintenance;
@@ -69,9 +70,7 @@ class MachineController extends Controller
         $exists = Machine::where('serial_number', $request->serial_number)->exists();
 
         if ($exists) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['serial_number' => 'Ya existe una máquina con ese número de serie.']);
+            return redirect()->back()->withInput();
         }
 
         Machine::create([
@@ -80,7 +79,7 @@ class MachineController extends Controller
             'model' => $request->model,
         ]);
 
-        return redirect()->route('machines.index');
+        return redirect()->route('machines.index')->with('success', '¡Machine create successfully');
     }
 
 

@@ -40,7 +40,7 @@ class ReasonEndController extends Controller
             'type' => $request->type,
         ]);
 
-        return redirect()->route('reasonEnds.index');
+        return redirect()->route('reasonEnds.index')->with('success', 'Reason End create successfully');
     }
 
     /**
@@ -68,7 +68,7 @@ class ReasonEndController extends Controller
             'type' => $request->type,
         ]);
 
-        return redirect()->route('reasonEnds.index');
+        return redirect()->route('reasonEnds.index')->with('success', 'Reason End update successfully');
     }
 
     /**
@@ -79,6 +79,6 @@ class ReasonEndController extends Controller
         $reasonEnds = ReasonEnd::findOrFail($id);
         $reasonEnds->delete();
         
-        return redirect()->route('reasonEnds.index');
+        return redirect()->route('reasonEnds.index')->with('success', 'Reason End delete successfully');
     }
 }

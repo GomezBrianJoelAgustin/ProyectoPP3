@@ -24,24 +24,28 @@
                 </div>
 
                 <div class="mb-4">
-                        <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
-                        <select name="type" id="type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            <option value="">-- Select Type --</option>
-                            @foreach ($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                    <select name="type" id="type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">-- Select Type --</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}" {{ old('type', $machine->typeRelation->id ?? '') == $type->id ? 'selected' : '' }}>
+                                {{ $type->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="model" class="block text-sm font-medium text-gray-700">Model</label>
-                        <select name="model" id="model" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            <option value="">-- Select Model --</option>
-                            @foreach ($models as $model)
-                                <option value="{{ $model->model }}">{{ $model->model }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="mb-4">
+                    <label for="model" class="block text-sm font-medium text-gray-700">Model</label>
+                    <select name="model" id="model" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">-- Select Model --</option>
+                        @foreach ($models as $model)
+                            <option value="{{ $model->model }}" {{ old('model', $machine->model) == $model->model ? 'selected' : '' }}>
+                                {{ $model->model }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
 
                  <div class="flex justify-end">

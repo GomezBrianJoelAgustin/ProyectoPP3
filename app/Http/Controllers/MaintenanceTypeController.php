@@ -40,7 +40,7 @@ class MaintenanceTypeController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('maintenanceTypes.index');
+        return redirect()->route('maintenanceTypes.index')->with('success', '¡Maintenance Type create successfully');
     }
 
     /**
@@ -68,7 +68,7 @@ class MaintenanceTypeController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('maintenanceTypes.index');
+        return redirect()->route('maintenanceTypes.index')->with('success', '¡Maintenance Type update successfully');
         
     }
 
@@ -80,6 +80,6 @@ class MaintenanceTypeController extends Controller
         $maintenanceTypes = MaintenanceType::findOrFail($id);
         $maintenanceTypes->delete();
 
-        return redirect()->route('maintenanceTypes.index');
+        return redirect()->route('maintenanceTypes.index')->with('success', '¡Maintenance Type delete successfully');
     }
 }

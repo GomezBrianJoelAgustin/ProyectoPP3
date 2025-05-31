@@ -38,7 +38,7 @@ class MachineTypeController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('machineTypes.index');
+        return redirect()->route('machineTypes.index')->with('success', '¡Machine Type create successfully');
     }
 
     /**
@@ -65,7 +65,7 @@ class MachineTypeController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('machineTypes.index');
+        return redirect()->route('machineTypes.index')->with('success', '¡Machine Type update successfully');
         
     }
 
@@ -76,6 +76,6 @@ class MachineTypeController extends Controller
     {
         $machineTypes = MachineType::findOrFail($id);
         $machineTypes->delete();
-        return redirect()->route('machineTypes.index');
+        return redirect()->route('machineTypes.index')->with('success', '¡Machine Type delete successfully');
     }
 }

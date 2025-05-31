@@ -31,7 +31,7 @@
                         <option value="">-- Select reason end --</option>
                         @foreach ($reasonEnds as $reasonEnd)
                             <option value="{{ $reasonEnd->id }}"
-                                {{ old('reason_end', $machine_work->reason_end) == $reasonEnd->id ? 'selected' : '' }}>
+                                {{ old('type', $machine_work->type) == $reasonEnd->id ? 'selected' : '' }}>
                                 {{ $reasonEnd->type }}
                             </option>
                         @endforeach

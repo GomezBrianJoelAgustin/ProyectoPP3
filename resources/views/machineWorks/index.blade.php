@@ -49,7 +49,7 @@
                                     <td class="px-6 py-4">{{ $machineWork->date_start }}</td>
                                     <td class="px-6 py-4">—</td>
                                     <td class="px-6 py-4">—</td>
-                                    <td class="px-6 py-4">{{ $machineWork->km_travel }}</td>
+                                    <td class="px-6 py-4">—</td>
                                     <td class="px-6 py-4">{{ $machineWork->machine->serial_number }}</td>
                                     <td class="px-6 py-4">{{ $machineWork->work->name }}</td>
                                     <td class="px-6 py-4">

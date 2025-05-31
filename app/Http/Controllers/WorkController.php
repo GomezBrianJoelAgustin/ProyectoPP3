@@ -49,7 +49,7 @@ class WorkController extends Controller
                'date_end' => $request->date_end,
         ]);
 
-        return redirect()->route('works.index');
+        return redirect()->route('works.index')->with('success', 'Work create successfully');
     }
 
     /**
@@ -86,7 +86,7 @@ class WorkController extends Controller
                'date_end' => $request->date_end,
         ]);
 
-        return redirect()->route('works.index');
+        return redirect()->route('works.index')->with('success', 'Work update successfully');
     }
 
     /**
@@ -95,6 +95,6 @@ class WorkController extends Controller
     public function destroy(Work $work)
     {
         $work->delete();
-        return redirect()->route('works.index');
+        return redirect()->route('works.index')->with('success', 'Work delete successfully');
     }
 }

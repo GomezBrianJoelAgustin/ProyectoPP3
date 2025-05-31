@@ -90,7 +90,7 @@ class MaintenanceController extends Controller
             'type' => $request->type,
         ]);
 
-        return redirect()->route('maintenances.index');
+        return redirect()->route('maintenances.index')->with('success', '¡Maintenance update successfully');
     }
 
     /**
@@ -99,6 +99,6 @@ class MaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         $maintenance->delete();
-        return redirect()->route('maintenances.index');
+        return redirect()->route('maintenances.index')->with('success', '¡Maintenance delete successfully');
     }
 }

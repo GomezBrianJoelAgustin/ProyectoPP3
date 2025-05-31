@@ -38,7 +38,7 @@ class ProvinceController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('provinces.index');
+        return redirect()->route('provinces.index')->with('success', 'Province create successfully');
     }
 
     /**
@@ -65,7 +65,7 @@ class ProvinceController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('provinces.index');
+        return redirect()->route('provinces.index')->with('success', 'Province update successfully');
     }
 
     /**
@@ -76,6 +76,6 @@ class ProvinceController extends Controller
         $provinces = Province::findOrFail($id);
         $provinces->delete();
 
-        return redirect()->route('provinces.index');
+        return redirect()->route('provinces.index')->with('success', 'Province delete successfully');
     }
 }
