@@ -28,10 +28,7 @@ class DatabaseSeeder extends Seeder
             MachineSeeder::class,
             ReasonEndSeeder::class,
             ProvinceSeeder::class,
-            MaintenanceTypeSeeder::class,
-            MaintenanceSeeder::class,
             WorkSeeder::class,
-            MachineWorkSeeder::class,
         ]);
 
     }

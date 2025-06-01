@@ -16,6 +16,11 @@
                         <input type="text" name="name" id="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required placeholder="Name...">
                     </div>
 
+                    <div class="mb-4">
+                        <label for="km" class="block text-sm font-medium text-gray-700">km</label>
+                        <input type="number" name="km" id="km" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required placeholder="km...">
+                    </div>
+
                     <div class="flex justify-end">
                         <button type="submit"  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow transition duration-200">
                             Create

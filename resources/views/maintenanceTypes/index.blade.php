@@ -24,6 +24,7 @@
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">ID</th>
                                 <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Km</th>
                                 <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Update</th>
                                 <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Delete</th>
                             </tr>
@@ -33,6 +34,7 @@
                                 <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $maintenanceType->id }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $maintenanceType->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $maintenanceType->km }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="{{ route('maintenanceTypes.edit', $maintenanceType->id) }}" class="text-green-600 hover:underline font-medium">Update</a></td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                                         <form action="{{ route('maintenanceTypes.destroy', $maintenanceType->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display:inline;">

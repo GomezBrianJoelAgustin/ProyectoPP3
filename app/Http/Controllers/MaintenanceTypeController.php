@@ -32,12 +32,15 @@ class MaintenanceTypeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
+            'km' => 'required|numeric',
         ]);
 
         MaintenanceType::create([
             'name' => $request->name,
+            'km' => $request->km,
         ]);
 
         return redirect()->route('maintenanceTypes.index')->with('success', '¡Maintenance Type create successfully');
@@ -60,12 +63,14 @@ class MaintenanceTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'km' => 'required|numeric',
         ]);
 
         $maintenanceTypes = MaintenanceType::findOrFail($id);
 
         $maintenanceTypes->update([
             'name' => $request->name,
+            'km' => $request->km,
         ]);
 
         return redirect()->route('maintenanceTypes.index')->with('success', '¡Maintenance Type update successfully');

@@ -8,7 +8,7 @@ use App\Models\Maintenance;
 class MaintenanceType extends Model 
 {
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'km'];
 
     public function maintenances(){
         return $this->hasMany(Maintenance::class, 'type');
