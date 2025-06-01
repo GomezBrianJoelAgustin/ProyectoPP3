@@ -104,6 +104,9 @@ class MachineWorkController extends Controller
     {
         $request->validate([
             'date_start' => 'required|date',
+            'date_end' => 'required|date',
+            'reason_end' => 'required|exists:reason_ends,id',
+            'km_travel' => 'required|numeric|min:0',
             'id_machines' => 'required|exists:machines,id',
             'id_works' => 'required|exists:works,id',
         ]);
@@ -142,7 +145,7 @@ class MachineWorkController extends Controller
         $request->validate([
             'date_end' => 'required|date',
             'reason_end' => 'required|exists:reason_ends,id',
-            'km_travel' => 'required|numeric',
+            'km_travel' => 'required|numeric|min:0',
             'id_machines' => 'required|exists:machines,id',
         ]);
 

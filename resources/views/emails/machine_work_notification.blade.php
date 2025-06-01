@@ -1,8 +1,7 @@
-{{-- resources/views/emails/machine_work_notification.blade.php --}}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Notificación de Nuevo Trabajo de Máquina</title>
+    <title>¡New machine work created notification!</title>
     <style>
         body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4; }
         .container { max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
@@ -14,24 +13,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>¡Nuevo Trabajo de Máquina Creado!</h1>
-        <p>Se ha registrado un nuevo trabajo de máquina con los siguientes detalles:</p>
+        <h1>¡New machine work created!</h1>
+        <p>A new machine work has been registered with the following details:</p>
         <ul>
-            <li><strong>ID del Trabajo:</strong> {{ $machineWork->id }}</li>
-            <li><strong>Fecha de Inicio:</strong> {{ $machineWork->date_start }}</li>
-            {{-- Puedes acceder a las relaciones si están definidas en tu modelo MachineWork --}}
+            <li><strong>Work ID:</strong> {{ $machineWork->id }}</li>
+            <li><strong>Start Date:</strong> {{ $machineWork->date_start }}</li>
+            {{-- You can access relationships if they are defined in your MachineWork model --}}
             @if($machineWork->machine)
-                <li><strong>Máquina:</strong> {{ $machineWork->machine->serial_number ?? 'N/A' }}</li>
+                <li><strong>Machine:</strong> {{ $machineWork->machine->serial_number ?? 'N/A' }}</li>
             @endif
             @if($machineWork->work)
-                <li><strong>Tipo de Trabajo:</strong> {{ $machineWork->work->name ?? 'N/A' }}</li>
+                <li><strong>Work Type:</strong> {{ $machineWork->work->name ?? 'N/A' }}</li>
             @endif
-            {{-- Añade aquí cualquier otro campo relevante de MachineWork que quieras mostrar --}}
-            {{-- Por ejemplo: <li><strong>Kilómetros Recorridos:</strong> {{ $machineWork->km_travel ?? 'N/A' }}</li> --}}
+            {{-- Add any other relevant MachineWork fields you want to display here --}}
+            {{-- For example: <li><strong>Kilometers Traveled:</strong> {{ $machineWork->km_travel ?? 'N/A' }}</li> --}}
         </ul>
-        <p>Por favor, revisa el sistema para más detalles.</p>
+        <p>Please check the system for more details.</p>
         <div class="footer">
-            <p>Saludos cordiales,<br>El equipo de {{ config('app.name') }}</p>
+            <p>Best regards,<br>The {{ config('app.name') }} Team</p>
         </div>
     </div>
 </body>
