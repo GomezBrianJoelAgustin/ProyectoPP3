@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\MachineType;
 use App\Models\Maintenance;
+use App\Models\MachineWork;
 
 
 class Machine extends Model
@@ -16,7 +17,7 @@ class Machine extends Model
 
         public function works()
     {
-        return $this->hasOne(MachineWork::class, 'id_machines');
+        return $this->hasMany(MachineWork::class, 'id_machines');
 
     }
 

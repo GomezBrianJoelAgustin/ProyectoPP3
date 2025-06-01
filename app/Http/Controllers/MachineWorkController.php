@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log; 
+use App\Models\MaintenanceType;
 use App\Events\MachineWorkCreated;
+use App\Events\MaintenanceAlert;
 use Illuminate\Support\Str;
 use App\Models\MachineWork;
 use App\Models\Machine;
 use App\Models\Work;
 use App\Models\ReasonEnd;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MachineWorkController extends Controller
 {
@@ -68,8 +72,6 @@ class MachineWorkController extends Controller
                 'id_works' => $request->id_works,
         ]);
 
-        \Log::info('CONTROLADOR: Evento MachineWorkCreated disparado.');
-
         event(new MachineWorkCreated($machineWorks));
         return redirect()->route('machineWorks.index')->with('success', '¡MachineWork create successfully');
 
@@ -125,6 +127,9 @@ class MachineWorkController extends Controller
             'id_machines' => $request->id_machines,
             'id_works' => $request->id_works,
         ]);
+        
+        $machineId = $request->input('id_machines'); 
+        $this->checkForMaintenanceOverdue($machineId);
 
         return redirect()->route('machineWorks.index')->with('success', 'Machine work updated successfully.');
     }
@@ -150,6 +155,10 @@ class MachineWorkController extends Controller
         ]);
 
         $machine_work = MachineWork::findOrFail($id);
+
+        $machineId = $request->input('id_machines'); 
+        $this->checkForMaintenanceOverdue($machineId);
+
         $cacheKey = 'total_km_' . $request->id_machines;
         $currentKm = Cache::get($cacheKey, 0);
         Cache::put($cacheKey, $currentKm + $request->km_travel);
@@ -177,5 +186,56 @@ class MachineWorkController extends Controller
         $machine_work->delete();
         
         return redirect()->route('machineWorks.index')->with('success', 'Machine work delete successfully.');;
+    }
+
+    public function checkForMaintenanceOverdue(int $machineId)
+    {
+       
+        $machine = Machine::findOrFail($machineId);
+        $maintenanceTypes = MaintenanceType::all();
+
+        foreach ($maintenanceTypes as $maintenanceType) {
+
+            $latestSpecificMaintenance = $machine->maintenance()
+                ->where('type', $maintenanceType->id)
+                ->latest('maintenance_date_start')
+                ->first();
+
+            $kilometersSinceLastMaintenance = $this->getKilometersSinceLastMaintenance(
+                $machine,
+                $latestSpecificMaintenance ? $latestSpecificMaintenance->maintenance_date_start : null
+            );
+
+            if ($kilometersSinceLastMaintenance >= $maintenanceType->km) {
+                event(new MaintenanceAlert($machine, $kilometersSinceLastMaintenance, $maintenanceType->km, $maintenanceType->name));
+            }
+        }
+        
+        return response()->json(['message' => 'Mantenimientos revisados']);
+    }
+
+    private function getKilometersSinceLastMaintenance(Machine $machine, ?string $lastMaintenanceDate): float
+    {
+        if (!$lastMaintenanceDate) {
+            $totalMachineKm = Cache::get('total_km_' . $machine->id, 0);
+            return (float) $totalMachineKm;
+        }
+
+        $machineWorks = $machine->works()
+                                ->whereNotNull('date_end') 
+                                ->whereNotNull('km_travel')
+                                ->where('km_travel', '>', 0) 
+                                ->orderBy('date_start')
+                                ->get();
+
+        $worksSinceLastMaintenance = $machineWorks->filter(function ($work) use ($lastMaintenanceDate) {
+            $workDate = Carbon::parse($work->date_start);
+            $maintenanceDate = Carbon::parse($lastMaintenanceDate);
+
+            return $workDate->greaterThanOrEqualTo($maintenanceDate);
+        });
+
+        $totalKilometers = $worksSinceLastMaintenance->sum('km_travel');
+        return (float) $totalKilometers;
     }
 }

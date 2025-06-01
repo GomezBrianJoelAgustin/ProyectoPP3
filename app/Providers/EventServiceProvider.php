@@ -10,6 +10,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\MachineWorkCreated::class => [
             \App\Listeners\SendMachineWorkNotification::class,
         ],
+        \App\Events\MaintenanceAlert::class => [ 
+        \App\Listeners\SendMaintenanceAlert::class,
+    ],
     ];
 
     public function boot(): void

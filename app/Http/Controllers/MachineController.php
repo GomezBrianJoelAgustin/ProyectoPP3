@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use App\Events\MaintenanceAlert;
 use Illuminate\Validation\Rule; 
 use App\Models\MachineType;
 use App\Models\Machine;
@@ -10,13 +11,8 @@ use App\Models\Maintenance;
 use App\Models\MachineWork;
 use Illuminate\Http\Request;
 
-
-
-
 class MachineController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      */
@@ -35,10 +31,15 @@ class MachineController extends Controller
 
         $kmPorMaquina = [];
 
-        foreach ($machines as $machine) {   
+        foreach ($machines as $machine) { 
             $cacheKey = 'total_km_' . $machine->id;
             $kmPorMaquina[$machine->id] = Cache::get($cacheKey, 0);
         }
+
+        // --- LÍNEA CORREGIDA ---
+        // HAS ELIMINADO LA LLAMADA AL EVENTO DESDE AQUÍ.
+        // La lógica de alerta de mantenimiento se maneja ahora en MachineWorkController.
+        // --- FIN LÍNEA CORREGIDA ---
 
         return view('machines.index', compact('machines', 'kmPorMaquina'));
     }
@@ -51,7 +52,6 @@ class MachineController extends Controller
         $types = MachineType::all(); 
         $models = Machine::select('model')->distinct()->get();
         return view('machines.create', compact('types' , 'models'));
-
     }
 
     /**
@@ -59,8 +59,6 @@ class MachineController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd($request->all());
         $request->validate([
             'serial_number' => 'required|string|max:255|unique:machines',
             'type' => 'required|exists:machine_types,id',
@@ -82,11 +80,9 @@ class MachineController extends Controller
         return redirect()->route('machines.index')->with('success', '¡Machine create successfully');
     }
 
-
     /**
      * Display the specified resource.
      */
-
     public function maintenance()
     {
         $machines = Machine::with('maintenance.maintenanceTypes')->get();
@@ -108,7 +104,6 @@ class MachineController extends Controller
      */
     public function update(Request $request, Machine $machine)
     {
-        // dd($request->all());
         $request->validate([
             'serial_number' => 'required|string|max:255|unique:machines,serial_number,' . $machine->id,
             'type' => 'required|exists:machine_types,id',
