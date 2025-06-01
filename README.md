@@ -162,3 +162,5 @@ MAIL_PASSWORD="your_gmail_app_password" # Crucial: Use an App Password!
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="your_gmail_address@gmail.com"
 MAIL_FROM_NAME="${APP_NAME}"
+
+QUEUE_CONNECTION=sync
