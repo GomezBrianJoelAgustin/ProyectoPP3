@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>¡Nueva Alerta de Mantenimiento!</title>
+    <title>New Maintenance Alert!</title>
     <style>
         body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4; }
         .container { max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-        h1 { color: #d9534f; /* Un rojo para indicar alerta */ }
+        h1 { color: #d9534f; /* A red to indicate alert */ }
         h2 { color: #555; }
         ul { list-style-type: none; padding: 0; }
         ul li { margin-bottom: 8px; }
@@ -25,34 +25,34 @@
 </head>
 <body>
     <div class="container">
-        <h1>¡Alerta de Mantenimiento Requerido!</h1>
-        <p>Se ha detectado que una máquina necesita mantenimiento.</p>
+        <h1>Maintenance Required Alert!</h1>
+        <p>A machine has been detected as needing maintenance.</p>
 
-        <h2>Detalles de la Máquina:</h2>
+        <h2>Machine Details:</h2>
         <ul>
-            <li><strong>ID de Máquina:</strong> <span class="highlight">{{ $machine->id }}</span></li>
-            <li><strong>Número de Serie:</strong> <span class="highlight">{{ $machine->serial_number }}</span></li>
-            <li><strong>Modelo:</strong> <span class="highlight">{{ $machine->model }}</span></li>
-            <li><strong>Tipo:</strong> <span class="highlight">{{ $machine->typeRelation->name ?? 'N/A' }}</span></li>
+            <li><strong>Machine ID:</strong> <span class="highlight">{{ $machine->id }}</span></li>
+            <li><strong>Serial Number:</strong> <span class="highlight">{{ $machine->serial_number }}</span></li>
+            <li><strong>Model:</strong> <span class="highlight">{{ $machine->model }}</span></li>
+            <li><strong>Type:</strong> <span class="highlight">{{ $machine->typeRelation->name ?? 'N/A' }}</span></li>
         </ul>
 
-        <h2>Mantenimiento Pendiente:</h2>
+        <h2>Pending Maintenance:</h2>
         <ul>
-            <li><strong>Tipo de Mantenimiento:</strong> <span class="highlight">{{ $maintenanceTypeName }}</span></li>
-            <li><strong>Kilómetros desde Último Mantenimiento:</strong> <span class="highlight">{{ number_format($kmSinceLastMaintenance, 0, ',', '.') }} km</span></li>
-            <li><strong>Umbral de Mantenimiento:</strong> <span class="highlight">{{ number_format($maintenanceThreshold, 0, ',', '.') }} km</span></li>
+            <li><strong>Maintenance Type:</strong> <span class="highlight">{{ $maintenanceTypeName }}</span></li>
+            <li><strong>Kilometers Since Last Maintenance:</strong> <span class="highlight">{{ number_format($kmSinceLastMaintenance, 0, ',', '.') }} km</span></li>
+            <li><strong>Maintenance Threshold:</strong> <span class="highlight">{{ number_format($maintenanceThreshold, 0, ',', '.') }} km</span></li>
         </ul>
 
-        <p>La máquina ha superado el kilometraje recomendado para este tipo de mantenimiento. ¡Actúa pronto para evitar problemas!</p>
+        <p>The machine has exceeded the recommended mileage for this type of maintenance. Act soon to avoid problems!</p>
 
-        {{-- Puedes añadir un enlace directo al sistema para gestionar el mantenimiento --}}
-        {{-- <a href="{{ route('machines.edit', $machine->id) }}" class="button">Ver Detalles en el Sistema</a> --}}
+        {{-- You can add a direct link to the system to manage maintenance --}}
+        {{-- <a href="{{ route('machines.edit', $machine->id) }}" class="button">View Details in System</a> --}}
 
-        <p>Por favor, revisa el sistema para más detalles y agenda el mantenimiento necesario.</p>
+        <p>Please check the system for more details and schedule the necessary maintenance.</p>
 
         <div class="footer">
-            <p>Saludos cordiales,<br>El equipo de {{ config('app.name') }}</p>
-            <p>Este es un mensaje automático, por favor no respondas a este correo.</p>
+            <p>Kind regards,<br>The {{ config('app.name') }} Team</p>
+            <p>This is an automated message, please do not reply to this email.</p>
         </div>
     </div>
 </body>
